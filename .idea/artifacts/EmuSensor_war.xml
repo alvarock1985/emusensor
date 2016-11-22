@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="EmuSensor:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="EmuSensor.war">
+      <element id="artifact" artifact-name="EmuSensor:war exploded" />
+    </root>
+  </artifact>
+</component>

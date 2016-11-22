@@ -8,6 +8,7 @@ import java.util.List;
 
 import xyz.acmeapps.api.EmuSensor.model.DataSensor;
 import xyz.acmeapps.api.EmuSensor.model.SensorData;
+import xyz.acmeapps.api.EmuSensor.model.SensorDataTimestamp;
 import xyz.acmeapps.api.EmuSensor.model.Station;
 import xyz.acmeapps.api.EmuSensor.service.StationService;
 
@@ -33,8 +34,7 @@ public class DataHistoric {
 				sensordata.setLatitude(rs.getFloat("latitude"));
 				sensordata.setLongitude(rs.getFloat("longitude"));
 				datasensor.add(sensordata);
-						
-						
+
 						
 			}
 			System.out.println(datasensor);
