@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Date;
@@ -23,10 +24,11 @@ public class DataTimeStmp {
     public Timestamp now = time.getTime();
     public Calendar cal = Calendar.getInstance();
     public Timestamp target = new Timestamp(new Date().getTime());
+    public List<SensorDataTimestamp> data2 = new ArrayList<>();
 
 
 
-    public void getDataTs(){
+    public List<SensorDataTimestamp> getDataTs(){
 
         cal.setTimeInMillis(target.getTime());
         cal.add(Calendar.HOUR, -5);
@@ -45,33 +47,43 @@ public class DataTimeStmp {
                         SensorDataTimestamp sd = new SensorDataTimestamp();
                         sd.setId(rs.getInt("sensorid"));
                         sd.setName(rs.getString("name"));
-                        if()
-
-
+                        int avg = 0;
+                        if(rs.getString("name")=="temp" && rs.getInt("sensorid")==sd.getId()){
+                            ArrayList<Integer> list = new ArrayList<>();
+                            while(rs.next()){
+                                list.add(rs.getInt("data"));
+                            }
+                            for(int y =0; i<list.size();i++){
+                                avg += list.get(i);
+                            }
+                            sd.setTempData(avg);
+                        }else if(rs.getString("name")=="caudal" && rs.getInt("sensorid")==sd.getId()){
+                            ArrayList<Integer> list = new ArrayList<>();
+                            while(rs.next()){
+                                list.add(rs.getInt("data"));
+                            }
+                            for(int y =0; i<list.size();i++){
+                                avg += list.get(i);
+                            }
+                            sd.setCaudalData(avg);
+                        }else{
+                            ArrayList<Integer> list = new ArrayList<>();
+                            while(rs.next()){
+                                list.add(rs.getInt("data"));
+                            }
+                            for(int y =0; i<list.size();i++){
+                                avg += list.get(i);
+                            }
+                            sd.setHumData(avg);
+                        }
+                        data2.add(sd);
                     }
-
-
-
-
                 }
-
-
-
-
-
-            }
-
-
-
-
+            }return data2;
         }
         catch(Exception e){
-
+            return null;
         }
-
-
-
-
     }
 
 
