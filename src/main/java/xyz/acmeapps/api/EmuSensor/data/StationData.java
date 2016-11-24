@@ -38,4 +38,35 @@ public class StationData {
 		
 	}
 	
+	public void insertStationData(String name, String description, String status, double lat, double lon){
+		
+		List<Station> data = this.getStationData();
+		int id;
+		id = data.size()+1;
+		System.out.println(id);
+		
+		try{
+			DataBase db = new DataBase();
+			Connection con = db.connectToDb();
+			statement = con.createStatement();
+			String insert = "insert into station (stationid, name, description, status, latitude, longitude) \n"
+							+"values ('"+id+"','"+name+"','"+description+"','"+status+"','"+lat+"','"+lon+"')";
+			statement.executeUpdate(insert);
+			
+			
+		}
+		catch(Exception e){
+			System.out.println(e);
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	}
+	
 }

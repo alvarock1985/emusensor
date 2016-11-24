@@ -2,6 +2,7 @@ package xyz.acmeapps.api.EmuSensor;
 
 import xyz.acmeapps.api.EmuSensor.data.DataTimeStmp;
 import xyz.acmeapps.api.EmuSensor.data.DataTimeStmp2;
+import xyz.acmeapps.api.EmuSensor.data.StationData;
 import xyz.acmeapps.api.EmuSensor.model.SensorDataTimestamp;
 import xyz.acmeapps.api.EmuSensor.service.DataTimestampService;
 
@@ -16,18 +17,11 @@ public class Main {
 
     public static void main(String[] args) {
 
-    		DataTimestampService d = new DataTimestampService();
-    		
-    		SensorDataTimestamp a = d.getStationTs(1, 5);
-    		
-    		List<SensorDataTimestamp> b = d.getDataTs(5);
-    		
- 		
-    		
-    		
-    		SensorDataTimestamp aaa = d.getStationTs(1, 5);
-    		
-    		System.out.println(aaa.getName());
+    	StationData s = new StationData();
+    	
+    	
+    	s.insertStationData("name", "test", "failed", -11.222222, -22.2222222);
+    	
     		
     }
 
