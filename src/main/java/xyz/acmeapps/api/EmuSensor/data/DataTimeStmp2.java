@@ -19,12 +19,15 @@ public class DataTimeStmp2 {
     public Timestamp now = time.getTime();
     public Calendar cal = Calendar.getInstance();
     public Timestamp target = new Timestamp(new Date().getTime());
+    public int num = 0 ;
     
-	public List<SensorDataTimestamp> getDataTs(){
+	public List<SensorDataTimestamp> getDataTs(int num){
     	cal.setTime(target);
-    	cal.add(Calendar.HOUR, -5);
+    	cal.add(Calendar.HOUR, -num);
     	target = new Timestamp(cal.getTime().getTime());
     	DataBase db = new DataBase();
+    	System.out.println(target);
+    	System.out.println(now);
     	try{
     		Connection con = db.connectToDb();
     		statement = con.createStatement();
@@ -57,3 +60,5 @@ public class DataTimeStmp2 {
 		}	
 	}
 }
+
+

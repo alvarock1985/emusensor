@@ -3,6 +3,7 @@ package xyz.acmeapps.api.EmuSensor;
 import xyz.acmeapps.api.EmuSensor.data.DataTimeStmp;
 import xyz.acmeapps.api.EmuSensor.data.DataTimeStmp2;
 import xyz.acmeapps.api.EmuSensor.model.SensorDataTimestamp;
+import xyz.acmeapps.api.EmuSensor.service.DataTimestampService;
 
 import javax.xml.crypto.Data;
 import java.util.ArrayList;
@@ -15,29 +16,20 @@ public class Main {
 
     public static void main(String[] args) {
 
-    		DataTimeStmp2 dt = new DataTimeStmp2();
+    		DataTimestampService d = new DataTimestampService();
     		
-    		List<SensorDataTimestamp> a = dt.getDataTs();
+    		SensorDataTimestamp a = d.getStationTs(1, 5);
     		
-    		for(int i=0;i<a.size();i++){
-    			System.out.println(a.get(i).getName());
-    			System.out.println(a.get(i).getTempData());
-    			System.out.println(a.get(i).getHumData());
-    			System.out.println(a.get(i).getCaudalData());
-    			
-    			
-    		}
+    		List<SensorDataTimestamp> b = d.getDataTs(5);
+    		
+ 		
     		
     		
-    	
-
-
-        }
-
-
-
-
-
+    		SensorDataTimestamp aaa = d.getStationTs(1, 5);
+    		
+    		System.out.println(aaa.getName());
+    		
+    }
 
  }
 

@@ -8,11 +8,18 @@ import xyz.acmeapps.api.EmuSensor.model.*;
 
 public class DataTimestampService {
 	
-	public List<SensorDataTimestamp> getDataTs(){
+	public List<SensorDataTimestamp> getDataTs(int num){
 		
 		DataTimeStmp2 data = new DataTimeStmp2();
-		return data.getDataTs();
+		return data.getDataTs(num);
 		
+		
+		
+	}
+	
+	public SensorDataTimestamp getStationTs(int id, int num){
+		DataTimeStmp2 data = new DataTimeStmp2();
+		return data.getDataTs(num).get(id-1);
 		
 		
 	}
