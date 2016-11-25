@@ -4,6 +4,7 @@ package xyz.acmeapps.api.EmuSensor;
 import xyz.acmeapps.api.EmuSensor.data.DataTimeStmp2;
 import xyz.acmeapps.api.EmuSensor.data.StationData;
 import xyz.acmeapps.api.EmuSensor.model.SensorDataTimestamp;
+import xyz.acmeapps.api.EmuSensor.model.Station;
 import xyz.acmeapps.api.EmuSensor.service.DataTimestampService;
 
 import javax.xml.crypto.Data;
@@ -17,11 +18,17 @@ public class Main {
 
     public static void main(String[] args) {
 
-    	StationData s = new StationData();
+    		StationData sd = new StationData();
+    		Station s = new Station();
+    		s.setName("test");
+    		s.setDescription("test");
+    		s.setStatus("Failed");
+    		s.setLatitude((float) -22.2222222);
+    		s.setLongitude((float) -11.111111);
     	
-    	
-    	s.insertStationData("name", "test", "failed", -11.222222, -22.2222222);
-    	
+    		
+    		sd.insertStationData(s);
+    		
     		
     }
 

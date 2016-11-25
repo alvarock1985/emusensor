@@ -48,5 +48,72 @@ public class SenDataDB {
 		}
 		
 	}
+	
+	
+	public List<DataSensorDb> getDataSensorDb(){
+		DataBase db = new DataBase();
+		try{
+			List<DataSensorDb> data = new ArrayList<>();
+			Connection con = db.connectToDb();
+			statement = con.createStatement();
+			String query = "select * from datasensor";
+			ResultSet rs = statement.executeQuery(query);
+			while(rs.next()){
+				DataSensorDb dataSensorDb = new DataSensorDb();
+				dataSensorDb.setId(rs.getInt("dataid"));
+				dataSensorDb.setSensorid(rs.getInt("sensor_sensorid"));
+				dataSensorDb.setData(rs.getInt("data"));
+				dataSensorDb.setTimestamp(rs.getDate("timestamp"));
+				data.add(dataSensorDb);
+			}
+			return data;
+			
+		}
+		catch(Exception e){
+			System.out.print(e);
+			return null;
+		}
+	}
+	
+	public int getMaxSensorId(){
+		int value = 0;
+		try{
+			DataBase db = new DataBase();
+			Connection con = db.connectToDb();
+			statement = con.createStatement();
+			String query = "select max(sensor_sensorid) as data from datasensor";
+			ResultSet rs = statement.executeQuery(query);
+			while(rs.next()){
+				value = rs.getInt("data");
+			}return value;
+		}
+		catch(Exception e){
+			System.out.println(e);
+			return 0;
+		}
+	}
+	
+	
+	
+	
+	
+	
+	public void insertDataSensor(DataSensorDb dataSensor){
+		List<DataSensorDb> data = this.getDataSensorDb();
+		int id;
+		id = data.size()+1;
+		try{
+			DataBase db = new DataBase();
+			Connection con = db.connectToDb();
+			statement = con.createStatement();
+			String insert = "insert into datasensor (dataid, sensor_sensorid, data, timestamp) \n "
+							+"values ('"+id+"','"+dataSensor.getSensorid()+"','"+dataSensor.getData()+"','"+dataSensor.getTimestamp()+"')";
+			statement.executeUpdate(insert);
+			
+		}
+		catch(Exception e){
+			System.out.println(e);
+		}
+	}
 
 }

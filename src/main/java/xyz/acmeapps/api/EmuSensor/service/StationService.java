@@ -11,5 +11,12 @@ public class StationService {
 		StationData sd = new StationData();
 		return sd.getStationData();
 	}
+	
+	public void addStation(Station station){
+		StationData sd = new StationData();
+		sd.insertStationData(station);
+		
+		
+	}
 
 }

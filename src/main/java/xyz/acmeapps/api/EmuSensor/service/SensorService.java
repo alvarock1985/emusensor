@@ -12,5 +12,12 @@ public class SensorService {
 		return data.getSensorData();
 		
 	}
+	
+	public void addSensor(Sensor sensor){
+		SensorDataDb data = new SensorDataDb();
+		data.insertSensorData(sensor);
+		
+		
+	}
 
 }

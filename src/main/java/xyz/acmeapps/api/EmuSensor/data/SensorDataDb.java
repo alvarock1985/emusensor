@@ -35,5 +35,26 @@ public class SensorDataDb {
 			return null;
 		}
 	}
+	
+	
+	public void insertSensorData(Sensor sensor){
+		List<Sensor> data = this.getSensorData();
+		int id;
+		id = data.size()+1;
+		
+		try{
+			DataBase db = new DataBase();
+			Connection con = db.connectToDb();
+			statement = con.createStatement();
+			String insert = "insert into sensor (sensorid, station_stationid, name, type, status) \n"
+							+"values ('"+id+"','"+sensor.getStationid()+"','"+sensor.getName()+"','"+sensor.getType()+"','"+sensor.getStatus()+"')";
+			statement.executeUpdate(insert);
+			
+		}
+		catch(Exception e){
+			System.out.println(e);
+		}
+		
+	}
 
 }

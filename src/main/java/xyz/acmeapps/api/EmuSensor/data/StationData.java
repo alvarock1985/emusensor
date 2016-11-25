@@ -38,7 +38,7 @@ public class StationData {
 		
 	}
 	
-	public void insertStationData(String name, String description, String status, double lat, double lon){
+	public void insertStationData(Station station){
 		
 		List<Station> data = this.getStationData();
 		int id;
@@ -50,7 +50,7 @@ public class StationData {
 			Connection con = db.connectToDb();
 			statement = con.createStatement();
 			String insert = "insert into station (stationid, name, description, status, latitude, longitude) \n"
-							+"values ('"+id+"','"+name+"','"+description+"','"+status+"','"+lat+"','"+lon+"')";
+							+"values ('"+id+"','"+station.getName()+"','"+station.getDescription()+"','"+station.getStatus()+"','"+station.getLatitude()+"','"+station.getLongitude()+"')";
 			statement.executeUpdate(insert);
 			
 			
