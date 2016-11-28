@@ -18,17 +18,15 @@ public class Main {
 
     public static void main(String[] args) {
 
-    		StationData sd = new StationData();
-    		Station s = new Station();
-    		s.setName("test");
-    		s.setDescription("test");
-    		s.setStatus("Failed");
-    		s.setLatitude((float) -22.2222222);
-    		s.setLongitude((float) -11.111111);
+    	DataTimeStmp2 s = new DataTimeStmp2();
     	
-    		
-    		sd.insertStationData(s);
-    		
+    	List<SensorDataTimestamp> a = s.getDataArrayTs(5);
+    	
+     	
+    	System.out.println(a.get(1).dataArrayCau);
+    	
+    	
+    	
     		
     }
 

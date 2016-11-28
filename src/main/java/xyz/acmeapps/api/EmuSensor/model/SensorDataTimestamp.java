@@ -1,6 +1,6 @@
 package xyz.acmeapps.api.EmuSensor.model;
 
-
+import java.util.ArrayList;
 
 /**
  * Created by alvaro on 21-11-16.
@@ -42,6 +42,10 @@ public class SensorDataTimestamp {
 	public void setTempData(float tempData) {
 		this.tempData = tempData;
 	}
+	
+	public ArrayList<Integer> dataArrayTemp = new ArrayList<>();
+	public ArrayList<Integer> dataArrayHum = new ArrayList<>();
+	public ArrayList<Integer> dataArrayCau = new ArrayList<>();
     
     
 

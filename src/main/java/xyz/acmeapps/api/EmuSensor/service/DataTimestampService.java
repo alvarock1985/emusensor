@@ -23,5 +23,12 @@ public class DataTimestampService {
 		
 		
 	}
+	
+	public SensorDataTimestamp getDataArray(int id, int num){
+		DataTimeStmp2 data = new DataTimeStmp2();
+		return data.getDataArrayTs(num).get(id-1);
+		
+		
+	}
 
 }

@@ -28,8 +28,8 @@ public class DataTimestampResource {
 	@GET
 	@Path("/{num}/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public SensorDataTimestamp  getDataTimestmpStation(@PathParam("num") int num, @PathParam("id") int id){
-		return data.getStationTs(id, num);
+	public SensorDataTimestamp  getDataArray(@PathParam("num") int num, @PathParam("id") int id){
+		return data.getDataArray(id, num);
 	}
 	
 	
