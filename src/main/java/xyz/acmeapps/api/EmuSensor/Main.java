@@ -23,7 +23,7 @@ public class Main {
     	List<SensorDataTimestamp> a = s.getDataArrayTs(5);
     	
      	
-    	System.out.println(a.get(1).dataArrayCau);
+    	System.out.println(a.get(1).dataTimestamp);
     	
     	
     	

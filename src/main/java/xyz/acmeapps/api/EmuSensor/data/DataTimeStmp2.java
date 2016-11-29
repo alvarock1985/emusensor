@@ -24,7 +24,7 @@ public class DataTimeStmp2 {
     
 	public List<SensorDataTimestamp> getDataTs(int num){
     	cal.setTime(target);
-    	cal.add(Calendar.HOUR, -num);
+    	cal.add(Calendar.HOUR, - (num+1));
     	target = new Timestamp(cal.getTime().getTime());
     	DataBase db = new DataBase();
     	System.out.println(target +" target");
@@ -51,6 +51,7 @@ public class DataTimeStmp2 {
     				else if(rs.getString("name").equals("caudal")&&stData.get(i).getId() == rs.getInt("stationid")){
     					stData.get(i).setCaudalData(rs.getFloat("data"));
     				}
+    				
     			}
     		}
     		return stData;		
@@ -65,7 +66,7 @@ public class DataTimeStmp2 {
 	public List<SensorDataTimestamp> getDataArrayTs(int num){
 		Timestamp target2 = new Timestamp(new Date().getTime());
     	cal.setTime(target);
-    	cal.add(Calendar.HOUR, - num);
+    	cal.add(Calendar.HOUR, - (num+1));
     	target2 = new Timestamp(cal.getTime().getTime());
     	DataBase db = new DataBase();
     	List<SensorDataTimestamp> dataTs = this.getDataTs(num);
@@ -86,6 +87,7 @@ public class DataTimeStmp2 {
     			for(int i=0;i<dataTs.size();i++){
     				if(rs.getString("name").equals("temp")&&stData.get(i).getId() == rs.getInt("stationid")){
     					dataTs.get(i).dataArrayTemp.add(rs.getInt("data"));
+    					dataTs.get(i).dataTimestamp.add(rs.getTime("timestamp"));
     				}
     				else if(rs.getString("name").equals("caudal")&&stData.get(i).getId() == rs.getInt("stationid")){
     					dataTs.get(i).dataArrayCau.add(rs.getInt("data"));

@@ -1,6 +1,8 @@
 package xyz.acmeapps.api.EmuSensor.model;
 
+import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by alvaro on 21-11-16.
@@ -46,6 +48,7 @@ public class SensorDataTimestamp {
 	public ArrayList<Integer> dataArrayTemp = new ArrayList<>();
 	public ArrayList<Integer> dataArrayHum = new ArrayList<>();
 	public ArrayList<Integer> dataArrayCau = new ArrayList<>();
+	public ArrayList<Time> dataTimestamp = new ArrayList<>();
     
     
 
