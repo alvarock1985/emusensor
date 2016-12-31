@@ -35,7 +35,7 @@ public class SenDataDB {
 				data.setSensorName(rs.getString(4));
 				data.setSensorType(rs.getString(5));
 				data.setSensorData(rs.getInt(6));
-				data.setSensorTimestamp(rs.getDate(7));
+				data.setSensorTimestamp(rs.getTimestamp(7));
 				sensordata.data.add(data);
 				datasensor.add(sensordata);
 				
@@ -63,7 +63,7 @@ public class SenDataDB {
 				dataSensorDb.setId(rs.getInt("dataid"));
 				dataSensorDb.setSensorid(rs.getInt("sensor_sensorid"));
 				dataSensorDb.setData(rs.getInt("data"));
-				dataSensorDb.setTimestamp(rs.getDate("timestamp"));
+				dataSensorDb.setTimestamp(rs.getTimestamp("timestamp"));
 				data.add(dataSensorDb);
 			}
 			return data;
@@ -81,7 +81,7 @@ public class SenDataDB {
 			DataBase db = new DataBase();
 			Connection con = db.connectToDb();
 			statement = con.createStatement();
-			String query = "select max(sensor_sensorid) as data from datasensor";
+			String query = "select max(dataid) as data from datasensor";
 			ResultSet rs = statement.executeQuery(query);
 			while(rs.next()){
 				value = rs.getInt("data");
@@ -101,13 +101,14 @@ public class SenDataDB {
 	public void insertDataSensor(DataSensorDb dataSensor){
 		List<DataSensorDb> data = this.getDataSensorDb();
 		int id;
-		id = data.size()+1;
+		id = this.getMaxSensorId()+1;
 		try{
 			DataBase db = new DataBase();
 			Connection con = db.connectToDb();
 			statement = con.createStatement();
 			String insert = "insert into datasensor (dataid, sensor_sensorid, data, timestamp) \n "
-							+"values ('"+id+"','"+dataSensor.getSensorid()+"','"+dataSensor.getData()+"','"+dataSensor.getTimestamp()+"')";
+							+"values ('"+id+"','"+dataSensor.getSensorid()+"','"+dataSensor.getData()+"',to_timestamp('"+dataSensor.getTimestamp()+"','YYYY/MM/DD HH24:MI:SS.FF'))";
+			System.out.println(insert);
 			statement.executeUpdate(insert);
 			
 		}

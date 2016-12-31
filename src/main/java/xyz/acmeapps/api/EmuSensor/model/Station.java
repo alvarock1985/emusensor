@@ -8,6 +8,21 @@ public class Station {
 	private String status;
 	private float latitude;
 	private float longitude;
+	private String cuenca;
+	private String type;
+	
+	public String getCuenca() {
+		return cuenca;
+	}
+	public void setCuenca(String cuenca) {
+		this.cuenca = cuenca;
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
 	public int getId() {
 		return id;
 	}

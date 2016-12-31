@@ -19,7 +19,7 @@ public class DataSensorsResource {
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<SensorData> getSensorData(){
+	public List<DataSensorDb> getSensorData(){
 		return data.getDataSensor();
 	}
 	

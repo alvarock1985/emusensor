@@ -26,6 +26,8 @@ public class StationData {
 				station.setDescription(rs.getString("description"));
 				station.setLatitude(rs.getFloat("latitude"));
 				station.setLongitude(rs.getFloat("longitude"));
+				station.setCuenca(rs.getString("cuenca"));
+				station.setType(rs.getString("type"));
 				stations.add(station);
 			}
 			System.out.println(stations);

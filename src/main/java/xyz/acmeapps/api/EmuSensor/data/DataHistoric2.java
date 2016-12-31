@@ -34,7 +34,7 @@ public class DataHistoric2 {
 						data.setSensorName(rs.getString("name"));
 						data.setSensorType(rs.getString("type"));
 						data.setSensorData(rs.getInt("data"));
-						data.setSensorTimestamp(rs.getDate("timestamp"));
+						data.setSensorTimestamp(rs.getTimestamp("timestamp"));
 						datasensor.get(i).data.add(data);
 					}
 					

@@ -8,9 +8,9 @@ import xyz.acmeapps.api.EmuSensor.model.SensorData;
 
 public class DataSensorService {
 	
-	public List<SensorData> getDataSensor(){
+	public List<DataSensorDb> getDataSensor(){
 		SenDataDB data = new SenDataDB();
-		return data.getDataSensor();
+		return data.getDataSensorDb();
 	}
 	
 	public void addDataSensor(DataSensorDb dataSensor){

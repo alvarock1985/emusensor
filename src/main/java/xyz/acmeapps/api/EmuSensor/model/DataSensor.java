@@ -1,5 +1,6 @@
 package xyz.acmeapps.api.EmuSensor.model;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class DataSensor {
@@ -14,7 +15,7 @@ public class DataSensor {
 	private String sensorName;
 	private String sensorType;
 	private int sensorData;
-	private Date sensorTimestamp;
+	private Timestamp sensorTimestamp;
 	
 	public String getSensorName() {
 		return sensorName;
@@ -34,10 +35,10 @@ public class DataSensor {
 	public void setSensorData(int sensorData) {
 		this.sensorData = sensorData;
 	}
-	public Date getSensorTimestamp() {
+	public Timestamp getSensorTimestamp() {
 		return sensorTimestamp;
 	}
-	public void setSensorTimestamp(Date sensorTimestamp) {
+	public void setSensorTimestamp(Timestamp sensorTimestamp) {
 		this.sensorTimestamp = sensorTimestamp;
 	}
 	
