@@ -30,6 +30,9 @@ public class StationData {
 				station.setType(rs.getString("type"));
 				stations.add(station);
 			}
+			rs.close();
+			statement.close();
+			con.close();
 			System.out.println(stations);
 			return stations;
 			
@@ -54,6 +57,8 @@ public class StationData {
 			String insert = "insert into station (stationid, name, description, status, latitude, longitude) \n"
 							+"values ('"+id+"','"+station.getName()+"','"+station.getDescription()+"','"+station.getStatus()+"','"+station.getLatitude()+"','"+station.getLongitude()+"')";
 			statement.executeUpdate(insert);
+			statement.close();
+			con.close();
 			
 			
 		}

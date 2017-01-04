@@ -1,9 +1,13 @@
 package xyz.acmeapps.api.EmuSensor.data;
 
 import java.sql.Connection;
+
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import xyz.acmeapps.api.EmuSensor.model.*;
@@ -40,6 +44,9 @@ public class SenDataDB {
 				datasensor.add(sensordata);
 				
 			}
+			rs.close();
+			statement.close();
+			con.close();
 			System.out.println(datasensor);
 			return datasensor;
 		}
@@ -66,6 +73,9 @@ public class SenDataDB {
 				dataSensorDb.setTimestamp(rs.getTimestamp("timestamp"));
 				data.add(dataSensorDb);
 			}
+			rs.close();
+			statement.close();
+			con.close();
 			return data;
 			
 		}
@@ -85,7 +95,12 @@ public class SenDataDB {
 			ResultSet rs = statement.executeQuery(query);
 			while(rs.next()){
 				value = rs.getInt("data");
-			}return value;
+			}
+			rs.close();
+			statement.close();
+			con.close();
+			
+			return value;
 		}
 		catch(Exception e){
 			System.out.println(e);
@@ -99,18 +114,25 @@ public class SenDataDB {
 	
 	
 	public void insertDataSensor(DataSensorDb dataSensor){
-		List<DataSensorDb> data = this.getDataSensorDb();
+		
 		int id;
 		id = this.getMaxSensorId()+1;
 		try{
 			DataBase db = new DataBase();
 			Connection con = db.connectToDb();
 			statement = con.createStatement();
+			Date timeValue = dataSensor.getTimestamp();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd KK:mm:ss");
+			
+			System.out.println(sdf.format(timeValue));
 			String insert = "insert into datasensor (dataid, sensor_sensorid, data, timestamp) \n "
-							+"values ('"+id+"','"+dataSensor.getSensorid()+"','"+dataSensor.getData()+"',to_timestamp('"+dataSensor.getTimestamp()+"','YYYY/MM/DD HH24:MI:SS.FF'))";
+				+"values ('"+id+"','"+dataSensor.getSensorid()+"','"+dataSensor.getData()+"',to_timestamp('"+sdf.format(timeValue)+"','YYYY/MM/DD HH24:MI:SS.FF'))";
+
 			System.out.println(insert);
 			statement.executeUpdate(insert);
 			
+			statement.close();
+			con.close();
 		}
 		catch(Exception e){
 			System.out.println(e);

@@ -27,7 +27,11 @@ public class SensorDataDb {
 				sensor.setName(rs.getString("name"));
 				sensor.setType(rs.getString("type"));
 				sensors.add(sensor);
-			}return sensors;
+			}
+			rs.close();
+			statement.close();
+			con.close();
+			return sensors;
 			
 			
 		}
@@ -49,8 +53,10 @@ public class SensorDataDb {
 			String insert = "insert into sensor (sensorid, station_stationid, name, type, status) \n"
 							+"values ('"+id+"','"+sensor.getStationid()+"','"+sensor.getName()+"','"+sensor.getType()+"','"+sensor.getStatus()+"')";
 			statement.executeUpdate(insert);
-			
+			statement.close();
+			con.close();
 		}
+		
 		catch(Exception e){
 			System.out.println(e);
 		}
