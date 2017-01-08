@@ -9,7 +9,7 @@ public class Test {
 	public static void main(String[] args) {
 		
 		QuartileCalc qc = new QuartileCalc();
-		qc.quartileCalc();
+		System.out.println(qc.quartileCalc());
 		
 	}
 

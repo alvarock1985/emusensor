@@ -24,6 +24,7 @@ public class HistoricStationModel {
 	public ArrayList<Double> dataTemperature = new ArrayList<>();
 	public ArrayList<Double> dataHumidity = new ArrayList<>();
 	public ArrayList<Double> dataPrecipitation = new ArrayList<>();
+	public ArrayList<Double> dataFlow = new ArrayList<>();
 	public ArrayList<Double> dataOthers = new ArrayList<>();
 
 }

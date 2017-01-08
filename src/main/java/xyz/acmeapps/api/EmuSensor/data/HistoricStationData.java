@@ -17,12 +17,14 @@ public class HistoricStationData {
 		ArrayList<Double> tempData = historicData.dataTemperature;
 		ArrayList<Double> humData = historicData.dataHumidity;
 		ArrayList<Double> prepData = historicData.dataPrecipitation;
+		ArrayList<Double> cauData = historicData.dataFlow;
 		ArrayList<Double> otherData = historicData.dataOthers;
 		
 		try{
 			double dataTempValue;
 			double dataHumValue;
 			double dataPrepValue;
+			double dataCauValue;
 			double dataOtherValue;
 			Connection con = db.connectToDb();
 			statement = con.createStatement();
@@ -41,10 +43,14 @@ public class HistoricStationData {
 				}else if(rs.getString("sensorname").equals("hum")){
 					dataHumValue = rs.getDouble("data");
 					humData.add(dataHumValue);
-				}else if(rs.getString("sensorname").equals("prep")){
+				}else if(rs.getString("sensorname").equals("precip")){
 					dataPrepValue = rs.getDouble("data");
 					prepData.add(dataPrepValue);
-				}else{
+				}else if(rs.getString("sensorname").equals("caudal")){
+					dataCauValue = rs.getDouble("data");
+					cauData.add(dataCauValue);
+				}
+				else{
 					dataOtherValue = rs.getDouble("data");
 					otherData.add(dataOtherValue);
 				}
