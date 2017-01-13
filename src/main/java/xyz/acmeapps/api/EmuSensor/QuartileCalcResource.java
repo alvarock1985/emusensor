@@ -2,6 +2,7 @@ package xyz.acmeapps.api.EmuSensor;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 import javax.ws.rs.core.MediaType;
@@ -18,11 +19,15 @@ public class QuartileCalcResource {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public QuartileDataModel getQuartileData(){
-		return data.getQuartileCalc();
-		
-		
+		return data.getQuartileCalc();	
 	}
 	
+	@GET
+	@Path("/last/{riverId}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public QuartileDataModel getQuartileLastData(@PathParam("riverId")int riverId){
+		return data.getQuartileLastData(riverId);
+	}
 	
 	
 

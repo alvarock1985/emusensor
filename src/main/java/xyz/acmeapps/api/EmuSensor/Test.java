@@ -9,7 +9,10 @@ public class Test {
 	public static void main(String[] args) {
 		
 		QuartileCalc qc = new QuartileCalc();
-		System.out.println(qc.quartileCalc());
+		System.out.println(qc.quartileCalcLastData(1));
+		
+		//HistoricStationData hs = new HistoricStationData();
+		//System.out.println(hs.getLastDataRiver(1));
 		
 	}
 

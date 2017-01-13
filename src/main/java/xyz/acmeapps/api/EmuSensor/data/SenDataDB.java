@@ -14,10 +14,10 @@ import xyz.acmeapps.api.EmuSensor.model.*;
 //Extracts data from DATASENSOR table
 public class SenDataDB {
 	
+	public DataBase db = new DataBase();
 	public Statement statement;
 	
 	public List<SensorData> getDataSensor(){
-		DataBase db = new DataBase();
 		
 		try{
 			List<SensorData> datasensor = new ArrayList<SensorData>();
@@ -41,8 +41,7 @@ public class SenDataDB {
 				data.setSensorData(rs.getInt(6));
 				data.setSensorTimestamp(rs.getTimestamp(7));
 				sensordata.data.add(data);
-				datasensor.add(sensordata);
-				
+				datasensor.add(sensordata);		
 			}
 			rs.close();
 			statement.close();
@@ -52,13 +51,11 @@ public class SenDataDB {
 		}
 		catch(Exception e){
 			return null;
-		}
-		
+		}	
 	}
 	
-	
 	public List<DataSensorDb> getDataSensorDb(){
-		DataBase db = new DataBase();
+		
 		try{
 			List<DataSensorDb> data = new ArrayList<>();
 			Connection con = db.connectToDb();
@@ -77,7 +74,6 @@ public class SenDataDB {
 			statement.close();
 			con.close();
 			return data;
-			
 		}
 		catch(Exception e){
 			System.out.print(e);
@@ -88,7 +84,6 @@ public class SenDataDB {
 	public int getMaxSensorId(){
 		int value = 0;
 		try{
-			DataBase db = new DataBase();
 			Connection con = db.connectToDb();
 			statement = con.createStatement();
 			String query = "select max(dataid) as data from datasensor";
@@ -99,7 +94,6 @@ public class SenDataDB {
 			rs.close();
 			statement.close();
 			con.close();
-			
 			return value;
 		}
 		catch(Exception e){
@@ -107,11 +101,6 @@ public class SenDataDB {
 			return 0;
 		}
 	}
-	
-	
-	
-	
-	
 	
 	public void insertDataSensor(DataSensorDb dataSensor){
 		
@@ -138,5 +127,6 @@ public class SenDataDB {
 			System.out.println(e);
 		}
 	}
-
+	
+	
 }

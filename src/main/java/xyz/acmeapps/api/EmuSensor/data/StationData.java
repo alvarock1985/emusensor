@@ -10,15 +10,22 @@ import xyz.acmeapps.api.EmuSensor.model.Station;
 
 public class StationData {
 	public Statement statement;
-	
-	public List<Station> getStationData(){
-		DataBase db = new DataBase();
-		
+	public DataBase db = new DataBase();
+	public List<Station> getStationData(int watershedId){
+
 		try{
 			List<Station> stations = new ArrayList<Station>();
 			Connection con = db.connectToDb();
 			statement = con.createStatement();
-			ResultSet rs = statement.executeQuery("Select * from station");
+			String query = "select station.stationid, station.name, station.description, station.status, \n"
+						+"station.latitude, station.longitude, station.type, watershed.id as watershedid, watershed.name as river \n"
+						+"from station join watershed on station.watershedid = watershed.id \n"
+						+"where watershed.id = "+watershedId;
+			
+			ResultSet rs = statement.executeQuery(query);
+			
+			
+			
 			while(rs.next()){
 				Station station = new Station();
 				station.setId(rs.getInt("stationid"));
@@ -26,8 +33,9 @@ public class StationData {
 				station.setDescription(rs.getString("description"));
 				station.setLatitude(rs.getFloat("latitude"));
 				station.setLongitude(rs.getFloat("longitude"));
-				station.setCuenca(rs.getString("cuenca"));
+				station.setWatershedId(rs.getInt("watershedid"));
 				station.setType(rs.getString("type"));
+				station.setWatershedName(rs.getString("river"));
 				stations.add(station);
 			}
 			rs.close();
@@ -35,17 +43,52 @@ public class StationData {
 			con.close();
 			System.out.println(stations);
 			return stations;
+		}
+		catch(Exception e){
+			return null;
+		}
+	}
+	
+	public List<Station> getAllStationsData(){
+		try{
+			List<Station> stations = new ArrayList<Station>();
+			Connection con = db.connectToDb();
+			statement = con.createStatement();
+			String query = "select * from station";
 			
+			ResultSet rs = statement.executeQuery(query);
+			
+			
+			
+			while(rs.next()){
+				Station station = new Station();
+				station.setId(rs.getInt("stationid"));
+				station.setName(rs.getString("name"));
+				station.setDescription(rs.getString("description"));
+				station.setLatitude(rs.getFloat("latitude"));
+				station.setLongitude(rs.getFloat("longitude"));
+				station.setWatershedId(rs.getInt("watershedid"));
+				station.setType(rs.getString("type"));
+				//station.setWatershedName(rs.getString("river"));
+				stations.add(station);
+			}
+			rs.close();
+			statement.close();
+			con.close();
+			System.out.println(stations);
+			return stations;
 		}
 		catch(Exception e){
 			return null;
 		}
 		
+		
+		
 	}
 	
 	public void insertStationData(Station station){
 		
-		List<Station> data = this.getStationData();
+		List<Station> data = this.getAllStationsData();
 		int id;
 		id = data.size()+1;
 		System.out.println(id);
@@ -65,15 +108,6 @@ public class StationData {
 		catch(Exception e){
 			System.out.println(e);
 		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
 	}
 	
 }

@@ -6,14 +6,19 @@ import xyz.acmeapps.api.EmuSensor.data.StationData;
 import xyz.acmeapps.api.EmuSensor.model.Station;
 
 public class StationService {
-	
+	public StationData sd = new StationData();
 	public List<Station> getAllStations(){
-		StationData sd = new StationData();
-		return sd.getStationData();
+		
+		return sd.getAllStationsData();
+	}
+	
+	public List<Station> getStations(int riverId){
+		return sd.getStationData(riverId);
+		
 	}
 	
 	public void addStation(Station station){
-		StationData sd = new StationData();
+		
 		sd.insertStationData(station);
 		
 		

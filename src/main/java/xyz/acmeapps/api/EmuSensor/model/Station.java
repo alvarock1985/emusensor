@@ -8,14 +8,22 @@ public class Station {
 	private String status;
 	private float latitude;
 	private float longitude;
-	private String cuenca;
+	private int watershedId;
 	private String type;
+	private String watershedName;
 	
-	public String getCuenca() {
-		return cuenca;
+
+	public String getWatershedName() {
+		return watershedName;
 	}
-	public void setCuenca(String cuenca) {
-		this.cuenca = cuenca;
+	public void setWatershedName(String watershedName) {
+		this.watershedName = watershedName;
+	}
+	public int getWatershedId() {
+		return watershedId;
+	}
+	public void setWatershedId(int watershedId) {
+		this.watershedId = watershedId;
 	}
 	public String getType() {
 		return type;

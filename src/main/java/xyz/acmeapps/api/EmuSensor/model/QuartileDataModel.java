@@ -1,5 +1,7 @@
 package xyz.acmeapps.api.EmuSensor.model;
 
+import java.util.ArrayList;
+
 public class QuartileDataModel {
 	
 	private String stationName;
@@ -14,6 +16,13 @@ public class QuartileDataModel {
 	private double humHigh;
 	private double humMax;
 	private double cauMin;
+	
+	public ArrayList<Double> tempArray = new ArrayList<>();
+	public ArrayList<Double> cauArray = new ArrayList<>();
+	public ArrayList<Double> humArray = new ArrayList<>();
+	public ArrayList<Double> prepArray = new ArrayList<>();
+	public ArrayList<Double> otherArray = new ArrayList<>();
+	
 	public double getHumMid() {
 		return humMid;
 	}
