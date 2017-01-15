@@ -25,13 +25,15 @@ public class DataTimeStmp {
     public int num = 0 ;
     
     
-    public List<SensorDataTimestamp> getDataSt(){
+    public List<SensorDataTimestamp> getDataSt(int riverId){
     	
     	try {
     		List<SensorDataTimestamp> data2 = new ArrayList<>();
     		Connection con = db.connectToDb();
     		statement = con.createStatement();
-    		String query = "select * from station";
+    		String query = "select * from station \n"
+    				+ "join watershed on station.watershedid = watershed.id \n"
+    				+ "where watershed.id = "+riverId;
     		ResultSet rs = statement.executeQuery(query);
     		while(rs.next()){
     			SensorDataTimestamp sd = new SensorDataTimestamp();
@@ -49,9 +51,9 @@ public class DataTimeStmp {
     		return null;
     	}
     }
-    public List<SensorDataTimestamp> getDataTimestamp(int num){
+    public List<SensorDataTimestamp> getDataTimestamp(int num, int riverId){
     	
-    	List<SensorDataTimestamp> stationData = this.getDataSt();
+    	List<SensorDataTimestamp> stationData = this.getDataSt(riverId);
     	cal.setTime(target);
     	cal.add(Calendar.HOUR, - (num+1));
     	target = new Timestamp(cal.getTime().getTime());
@@ -61,11 +63,14 @@ public class DataTimeStmp {
     		String query = "select station.stationid, station.description, datasensor.sensor_sensorid, sensor.name, to_char(avg(datasensor.data), '99.99') as data \n"
     						+"from datasensor join sensor on datasensor.sensor_sensorid = sensor.sensorid \n"
     						+"join station on sensor.station_stationid = station.stationid \n"
+    						+"join watershed on station.watershedid = watershed.id \n"
     						+"where timestamp >= to_timestamp('"+target+"', 'yyyy-mm-dd hh24:mi:ss.ff') \n"
     						+"and timestamp <= to_timestamp('"+now+"', 'yyyy-mm-dd hh24:mi:ss.ff') \n"
+    						+"and watershed.id = "+riverId+" \n"
     						+"group by station.stationid, station.description, datasensor.sensor_sensorid, sensor.name \n"
     						+"order by station.stationid, station.description, datasensor.sensor_sensorid, sensor.name";
     		ResultSet rs = statement.executeQuery(query);
+    		System.out.println(query);
     		while(rs.next()){
     			for(int i=0; i<stationData.size();i++){
     				if(rs.getString("name").equals("temp")&&stationData.get(i).getId() == rs.getInt("stationid")){
@@ -90,13 +95,13 @@ public class DataTimeStmp {
 		}	
     }
 
-    public List<SensorDataTimestamp> getDataArrayTimestamp(int num){
+    public List<SensorDataTimestamp> getDataArrayTimestamp(int num, int riverId){
 		Timestamp target2 = new Timestamp(new Date().getTime());
     	cal.setTime(target);
     	cal.add(Calendar.HOUR, - (num+1));
     	target2 = new Timestamp(cal.getTime().getTime());
-    	List<SensorDataTimestamp> dataTs = this.getDataTimestamp(num);
-    	List<SensorDataTimestamp> stationData = this.getDataSt();
+    	List<SensorDataTimestamp> dataTs = this.getDataTimestamp(num, riverId);
+    	List<SensorDataTimestamp> stationData = this.getDataSt(riverId);
     	
     	try{
     		Connection con = db.connectToDb();
@@ -107,7 +112,7 @@ public class DataTimeStmp {
     				+"and datasensor.timestamp <= to_timestamp('"+now+"', 'yyyy-mm-dd hh24:mi:ss.ff') \n"
     				+"order by datasensor.timestamp";
     		ResultSet rs = statement.executeQuery(query);
-    		
+    		System.out.println(query);
     		while(rs.next()){
     			for(int i=0;i<dataTs.size();i++){
     				if(rs.getString("name").equals("temp")&&stationData.get(i).getId() == rs.getInt("stationid")){

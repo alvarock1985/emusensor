@@ -18,18 +18,18 @@ public class DataTimestampResource {
 	
 	
 	@GET
-	@Path("/{num}")
+	@Path("/{num}/{riverId}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<SensorDataTimestamp> getDataTimestmpAll(@PathParam("num") int num){
-		return data.getDataTs(num);
+	public List<SensorDataTimestamp> getDataTimestmpAll(@PathParam("num") int num, @PathParam("riverId") int riverId){
+		return data.getDataTs(num, riverId);
 	}
 	
 	
 	@GET
-	@Path("/{num}/{id}")
+	@Path("/{num}/{id}/{riverId}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public SensorDataTimestamp  getDataArray(@PathParam("num") int num, @PathParam("id") int id){
-		return data.getDataArray(id, num);
+	public SensorDataTimestamp  getDataArray(@PathParam("num") int num, @PathParam("id") int id, @PathParam("riverId") int riverId){
+		return data.getDataArray(id, num, riverId);
 	}
 	
 	
