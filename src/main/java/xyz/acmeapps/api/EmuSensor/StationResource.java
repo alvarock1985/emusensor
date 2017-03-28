@@ -11,6 +11,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import xyz.acmeapps.api.EmuSensor.service.StationService;
+import xyz.acmeapps.api.EmuSensor.model.SensorDataTimestamp;
 import xyz.acmeapps.api.EmuSensor.model.Station;
 
 @Path("/stations")
@@ -28,6 +29,13 @@ public class StationResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Station> getStation(@PathParam("riverId") int riverId){
 		return data.getStations(riverId);
+	}
+	
+	@GET
+	@Path("/data/{stationId}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<SensorDataTimestamp> getStationData(@PathParam("stationId") int stationId){
+		return data.getStationData(stationId);
 	}
 	
 	@POST

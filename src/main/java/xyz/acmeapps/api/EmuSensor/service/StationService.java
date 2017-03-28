@@ -3,6 +3,7 @@ package xyz.acmeapps.api.EmuSensor.service;
 import java.util.List;
 
 import xyz.acmeapps.api.EmuSensor.data.StationData;
+import xyz.acmeapps.api.EmuSensor.model.SensorDataTimestamp;
 import xyz.acmeapps.api.EmuSensor.model.Station;
 
 public class StationService {
@@ -20,6 +21,10 @@ public class StationService {
 	public void addStation(Station station){
 		
 		sd.insertStationData(station);
+	}
+	
+	public List<SensorDataTimestamp> getStationData(int stationId){
+		return sd.getDataArrayTime(stationId);
 		
 		
 	}
