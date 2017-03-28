@@ -38,6 +38,13 @@ public class StationResource {
 		return data.getStationData(stationId);
 	}
 	
+	@GET
+	@Path("/data/{stationId}/{timeRange}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<SensorDataTimestamp> getStationDataTimeRange(@PathParam("stationId") int stationId, @PathParam("timeRange") int timeRange){
+		return data.getStationDataTimeRange(stationId, timeRange);
+	}
+	
 	@POST
 	@Path("/add")
 	@Consumes(MediaType.APPLICATION_JSON)
