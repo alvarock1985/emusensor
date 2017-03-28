@@ -32,7 +32,7 @@ public class DataTimeStmp {
     		Connection con = db.connectToDb();
     		statement = con.createStatement();
     		String query = "select * from station \n"
-    				+ "join watershed on station.watershedid = watershed.id \n"
+    				+ "join watershed on station.watershed_id = watershed.id \n"
     				+ "where watershed.id = "+riverId;
     		ResultSet rs = statement.executeQuery(query);
     		while(rs.next()){
@@ -63,7 +63,7 @@ public class DataTimeStmp {
     		String query = "select station.stationid, station.description, datasensor.sensor_sensorid, sensor.name, to_char(avg(datasensor.data), '99.99') as data \n"
     						+"from datasensor join sensor on datasensor.sensor_sensorid = sensor.sensorid \n"
     						+"join station on sensor.station_stationid = station.stationid \n"
-    						+"join watershed on station.watershedid = watershed.id \n"
+    						+"join watershed on station.watershed_id = watershed.id \n"
     						+"where timestamp >= to_timestamp('"+target+"', 'yyyy-mm-dd hh24:mi:ss.ff') \n"
     						+"and timestamp <= to_timestamp('"+now+"', 'yyyy-mm-dd hh24:mi:ss.ff') \n"
     						+"and watershed.id = "+riverId+" \n"

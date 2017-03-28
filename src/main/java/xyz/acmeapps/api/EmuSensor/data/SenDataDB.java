@@ -111,7 +111,7 @@ public class SenDataDB {
 			Connection con = db.connectToDb();
 			statement = con.createStatement();
 			Date timeValue = dataSensor.getTimestamp();
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd KK:mm:ss");
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss");
 			
 			System.out.println(sdf.format(timeValue));
 			String insert = "insert into datasensor (dataid, sensor_sensorid, data, timestamp) \n "

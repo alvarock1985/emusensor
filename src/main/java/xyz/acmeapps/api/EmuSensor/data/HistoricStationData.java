@@ -110,8 +110,8 @@ public class HistoricStationData {
 						+"from (select datasensor.data, watershed.id, sensor.name as sensorname, station.description, watershed.name as river \n"
 						+"from datasensor join sensor on datasensor.sensor_sensorid = sensor.sensorid \n"
 						+"join station on sensor.station_stationid = station.stationid \n"
-						+"join WATERSHED on station.watershedid = watershed.id \n"
-						+"where station.watershedid = "+river+" \n"
+						+"join WATERSHED on station.watershed_id = watershed.id \n"
+						+"where station.watershed_id = "+river+" \n"
 						+"order by datasensor.dataid desc) \n"
 						+"where rownum <= "+maxSensor;
 			System.out.println(query);

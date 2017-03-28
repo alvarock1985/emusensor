@@ -13,7 +13,7 @@ public class DataBase {
 		try {
 			
 			Class.forName("oracle.jdbc.OracleDriver");
-			String dataBase = "jdbc:oracle:thin:@168.232.165.95:1521:xe";
+			String dataBase = "jdbc:oracle:thin:@170.239.86.239:1521:xe";
 			connection = DriverManager.getConnection(dataBase, "emuapi","oracle");
 			statement = connection.createStatement();
 			if (connection != null){

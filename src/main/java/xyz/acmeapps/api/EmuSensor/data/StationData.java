@@ -19,7 +19,7 @@ public class StationData {
 			statement = con.createStatement();
 			String query = "select station.stationid, station.name, station.description, station.status, \n"
 						+"station.latitude, station.longitude, station.type, watershed.id as watershedid, watershed.name as river \n"
-						+"from station join watershed on station.watershedid = watershed.id \n"
+						+"from station join watershed on station.watershed_id = watershed.id \n"
 						+"where watershed.id = "+watershedId;
 			
 			ResultSet rs = statement.executeQuery(query);
@@ -67,7 +67,7 @@ public class StationData {
 				station.setDescription(rs.getString("description"));
 				station.setLatitude(rs.getFloat("latitude"));
 				station.setLongitude(rs.getFloat("longitude"));
-				station.setWatershedId(rs.getInt("watershedid"));
+				station.setWatershedId(rs.getInt("watershed_id"));
 				station.setType(rs.getString("type"));
 				//station.setWatershedName(rs.getString("river"));
 				stations.add(station);

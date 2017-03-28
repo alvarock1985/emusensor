@@ -46,6 +46,9 @@ public class QuartileCalc {
 			quartileModel.setTempMid(Quartile.quartile(tempDataValues, 50));
 			quartileModel.setTempHigh(Quartile.quartile(tempDataValues, 75));
 			quartileModel.setTempMax(Quartile.max(tempDataValues));
+			if (quartileModel.getTempLow() == quartileModel.getTempMid()){
+				quartileModel.setTempLow(quartileModel.getTempLow() -1 );
+			}
 			quartileModel.tempArray.add(quartileModel.getTempMin());
 			quartileModel.tempArray.add(quartileModel.getTempLow());
 			quartileModel.tempArray.add(quartileModel.getTempMid());
@@ -62,6 +65,9 @@ public class QuartileCalc {
 			quartileModel.setHumMid(Quartile.quartile(humDataValues, 50));
 			quartileModel.setHumHigh(Quartile.quartile(humDataValues, 75));
 			quartileModel.setHumMax(Quartile.max(humDataValues));
+			if ((int)(quartileModel.getHumLow()) == (int)(quartileModel.getHumMid())){
+				quartileModel.setHumLow(quartileModel.getHumLow() -1 );
+			}
 			quartileModel.humArray.add(quartileModel.getHumMin());
 			quartileModel.humArray.add(quartileModel.getHumLow());
 			quartileModel.humArray.add(quartileModel.getHumMid());
@@ -77,6 +83,9 @@ public class QuartileCalc {
 			quartileModel.setCauMid(Quartile.quartile(cauDataValues, 50));
 			quartileModel.setCauHigh(Quartile.quartile(cauDataValues, 75));
 			quartileModel.setCauMax(Quartile.max(cauDataValues));
+			if (quartileModel.getCauLow() == quartileModel.getCauMid()){
+				quartileModel.setCauLow(quartileModel.getCauLow() -1 );
+			}
 			quartileModel.cauArray.add(quartileModel.getCauMin());
 			quartileModel.cauArray.add(quartileModel.getCauLow());
 			quartileModel.cauArray.add(quartileModel.getCauMid());
@@ -93,6 +102,9 @@ public class QuartileCalc {
 			quartileModel.setPrepMid(Quartile.quartile(prepDataValues, 50));
 			quartileModel.setPrepHigh(Quartile.quartile(prepDataValues, 75));
 			quartileModel.setPrepMax(Quartile.max(prepDataValues));
+			if (quartileModel.getPrepLow() == quartileModel.getPrepMid()){
+				quartileModel.setPrepLow(quartileModel.getPrepLow() -1 );
+			}
 			quartileModel.prepArray.add(quartileModel.getPrepMin());
 			quartileModel.prepArray.add(quartileModel.getPrepLow());
 			quartileModel.prepArray.add(quartileModel.getPrepMid());
@@ -109,6 +121,9 @@ public class QuartileCalc {
 			quartileModel.setOtherMid(Quartile.quartile(otherDataValues, 50));
 			quartileModel.setOtherHigh(Quartile.quartile(otherDataValues, 75));
 			quartileModel.setOtherMax(Quartile.max(otherDataValues));
+			if (quartileModel.getOtherLow() == quartileModel.getOtherMid()){
+				quartileModel.setOtherLow(quartileModel.getOtherLow() -1 );
+			}
 			quartileModel.otherArray.add(quartileModel.getOtherMin());
 			quartileModel.otherArray.add(quartileModel.getOtherLow());
 			quartileModel.otherArray.add(quartileModel.getOtherMid());
