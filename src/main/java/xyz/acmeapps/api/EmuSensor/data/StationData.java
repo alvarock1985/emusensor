@@ -313,8 +313,8 @@ public class StationData {
 			DataBase db = new DataBase();
 			Connection con = db.connectToDb();
 			statement = con.createStatement();
-			String insert = "insert into station (stationid, name, description, status, latitude, longitude) \n"
-							+"values ('"+id+"','"+station.getName()+"','"+station.getDescription()+"','"+station.getStatus()+"','"+station.getLatitude()+"','"+station.getLongitude()+"')";
+			String insert = "insert into station (stationid, name, description, status, latitude, longitude, watershed_id, type) \n"
+							+"values ('"+id+"','"+station.getName()+"','"+station.getDescription()+"','"+station.getStatus()+"','"+station.getLatitude()+"','"+station.getLongitude()+"','"+station.getWatershedId()+"','"+station.getType()+"')";
 			statement.executeUpdate(insert);
 			statement.close();
 			con.close();
