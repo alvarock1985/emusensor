@@ -16,6 +16,7 @@ public class SenDataDB {
 	
 	public DataBase db = new DataBase();
 	public Statement statement;
+	public Time time = new Time();
 	
 	public List<SensorData> getDataSensor(){
 		
@@ -124,6 +125,28 @@ public class SenDataDB {
 			con.close();
 		}
 		catch(Exception e){
+			System.out.println(e);
+		}
+	}
+	
+	public void insertDataSensorProto(DataSensorProto dataSensorProto){
+		DataIdGenerator dataId = new DataIdGenerator();
+		int dataIdValue = dataId.getDataId();
+		System.out.println(dataIdValue);
+		System.out.println(dataSensorProto.getSensorId());
+		try{
+			DataBase db = new DataBase();
+			Connection con = db.connectToDb();
+			statement = con.createStatement();
+			Timestamp timeValue = time.getTime();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss");
+			String insert = "insert into datasensor (dataid, sensor_sensorid, data, timestamp) \n "
+					+"values ('"+dataIdValue+"','"+dataSensorProto.getSensorId()+"','"+dataSensorProto.getData()+"',to_timestamp('"+sdf.format(timeValue)+"','YYYY/MM/DD HH24:MI:SS.FF'))";
+			
+			statement.executeUpdate(insert);
+			statement.close();
+			con.close();
+		}catch(Exception e){
 			System.out.println(e);
 		}
 	}

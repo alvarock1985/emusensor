@@ -4,6 +4,7 @@ import java.util.List;
 
 import xyz.acmeapps.api.EmuSensor.data.SenDataDB;
 import xyz.acmeapps.api.EmuSensor.model.DataSensorDb;
+import xyz.acmeapps.api.EmuSensor.model.DataSensorProto;
 import xyz.acmeapps.api.EmuSensor.model.SensorData;
 
 public class DataSensorService {
@@ -20,6 +21,11 @@ public class DataSensorService {
 		
 		
 		
+	}
+	
+	public void addDataSensorProto(DataSensorProto dataSensorProto){
+		SenDataDB data = new SenDataDB();
+		data.insertDataSensorProto(dataSensorProto);
 	}
 
 }

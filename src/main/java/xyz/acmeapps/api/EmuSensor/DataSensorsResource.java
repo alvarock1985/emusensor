@@ -11,6 +11,7 @@ import javax.ws.rs.core.MediaType;
 
 import xyz.acmeapps.api.EmuSensor.service.DataSensorService;
 import xyz.acmeapps.api.EmuSensor.model.DataSensorDb;
+import xyz.acmeapps.api.EmuSensor.model.DataSensorProto;
 import xyz.acmeapps.api.EmuSensor.model.SensorData;
 @Path("/datasensors")
 public class DataSensorsResource {
@@ -29,9 +30,14 @@ public class DataSensorsResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void addDataSensor(DataSensorDb dataSensor){
 		data.addDataSensor(dataSensor);
-		
-		
-		
+	}
+	
+	@POST
+	@Path("/add/proto")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void addDataSensorProto(DataSensorProto dataSensor){
+		data.addDataSensorProto(dataSensor);
 	}
 
 }

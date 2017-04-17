@@ -17,7 +17,16 @@ public class SensorService {
 		SensorDataDb data = new SensorDataDb();
 		data.insertSensorData(sensor);
 		
-		
+	}
+	
+	public void updateSensorStatus(Sensor sensor){
+		SensorDataDb data = new SensorDataDb();
+		data.updateSensorStatus(sensor);
 	}
 
+	
+	public List<Sensor> getSensor(int sensorId){
+		SensorDataDb data = new SensorDataDb();
+		return data.getSensor(sensorId);
+	}
 }

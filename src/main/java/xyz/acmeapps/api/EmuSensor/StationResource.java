@@ -51,9 +51,14 @@ public class StationResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public void addStation(Station station){
 		data.addStation(station);
-		
-		
-		
 	}
-
+	
+	@POST
+	@Path("/updateStatus")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public void updateStationStatus(Station station){
+		data.updateStationStatus(station);
+	
+	}
 }

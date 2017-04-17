@@ -28,5 +28,9 @@ public class StationService {
 	public List<SensorDataTimestamp> getStationDataTimeRange(int stationId, int timeRange){
 		return sd.getDataArrayTimeRange(stationId, timeRange);
 	}
+	
+	public void updateStationStatus(Station station){
+		sd.updateStationStatus(station);
+	}
 
 }

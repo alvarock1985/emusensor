@@ -46,6 +46,7 @@ public class StationData {
 				station.setWatershedId(rs.getInt("watershedid"));
 				station.setType(rs.getString("type"));
 				station.setWatershedName(rs.getString("river"));
+				station.setStatus(rs.getString("status"));
 				stations.add(station);
 			}
 			rs.close();
@@ -79,6 +80,7 @@ public class StationData {
 				station.setLongitude(rs.getFloat("longitude"));
 				station.setWatershedId(rs.getInt("watershed_id"));
 				station.setType(rs.getString("type"));
+				station.setStatus(rs.getString("status"));
 				//station.setWatershedName(rs.getString("river"));
 				stations.add(station);
 			}
@@ -324,6 +326,27 @@ public class StationData {
 		catch(Exception e){
 			System.out.println(e);
 		}
+	}
+	
+	public void updateStationStatus(Station station){
+		int stationId = station.getId();
+		System.out.println(stationId);
+		String status = station.getStatus();
+		
+		try{
+			DataBase db = new DataBase();
+			Connection con = db.connectToDb();
+			statement = con.createStatement();
+			String update = "update station set status = '"+status+"' where stationid ="+stationId;
+			System.out.println(update);
+			statement.executeUpdate(update);
+			statement.close();
+			con.close();
+			
+		}catch(Exception e){
+			System.out.println(e);
+		}
+		
 	}
 	
 }
