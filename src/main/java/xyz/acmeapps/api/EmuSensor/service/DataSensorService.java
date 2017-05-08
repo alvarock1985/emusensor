@@ -14,6 +14,11 @@ public class DataSensorService {
 		return data.getDataSensorDb();
 	}
 	
+	public List<DataSensorDb> getLastRows(int rows, int sensorId){
+		SenDataDB data = new SenDataDB();
+		return data.getLastRows(rows, sensorId);
+	}
+	
 	public void addDataSensor(DataSensorDb dataSensor){
 		
 		SenDataDB data = new SenDataDB();

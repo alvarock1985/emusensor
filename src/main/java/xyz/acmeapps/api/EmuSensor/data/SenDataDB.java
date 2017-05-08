@@ -151,5 +151,36 @@ public class SenDataDB {
 		}
 	}
 	
+	public List<DataSensorDb> getLastRows(int numRow, int sensorId){
+		try{
+			List<DataSensorDb> data = new ArrayList<>();
+			DataBase db = new DataBase();
+			Connection con = db.connectToDb();
+			statement = con.createStatement();
+			String query = "select * from (select * from datasensor where sensor_sensorid="+sensorId+" order by timestamp desc) where rownum <= "+numRow;
+			ResultSet rs = statement.executeQuery(query);
+			while(rs.next()){
+				DataSensorDb sensorData = new DataSensorDb();
+				sensorData.setId(rs.getInt("dataid"));
+				sensorData.setData(rs.getInt("data"));
+				sensorData.setSensorid(rs.getInt("sensor_sensorid"));
+				sensorData.setTimestamp(rs.getTimestamp("timestamp"));
+				data.add(sensorData);
+			}
+			con.close();
+			rs.close();
+			statement.close();
+			return data;
+			
+			
+			
+			
+		}catch(Exception e){
+			return null;
+			
+		}
+		
+	}
+	
 	
 }

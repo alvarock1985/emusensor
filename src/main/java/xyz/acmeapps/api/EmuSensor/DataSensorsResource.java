@@ -6,6 +6,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -22,6 +23,13 @@ public class DataSensorsResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<DataSensorDb> getSensorData(){
 		return data.getDataSensor();
+	}
+	
+	@GET
+	@Path("/last/{rowNum}/{sensorId}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<DataSensorDb> getLastRows(@PathParam("rowNum") int rowNum, @PathParam("sensorId") int sensorId){
+		return data.getLastRows(rowNum, sensorId);
 	}
 	
 	@POST
