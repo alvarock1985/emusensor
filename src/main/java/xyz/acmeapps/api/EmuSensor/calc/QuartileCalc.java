@@ -1,6 +1,14 @@
 package xyz.acmeapps.api.EmuSensor.calc;
 
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import xyz.acmeapps.api.EmuSensor.data.HistoricStationData;
+import xyz.acmeapps.api.EmuSensor.data.SenDataDB;
+import xyz.acmeapps.api.EmuSensor.model.DataSensorDb;
+import xyz.acmeapps.api.EmuSensor.model.DriftModel;
 import xyz.acmeapps.api.EmuSensor.model.HistoricDataModel;
 import xyz.acmeapps.api.EmuSensor.model.HistoricStationModel;
 import xyz.acmeapps.api.EmuSensor.model.QuartileDataModel;
@@ -263,6 +271,96 @@ public class QuartileCalc {
 			System.out.println("other list is empty");
 		}
 		return quartileModel;
+	}
+	
+	public DriftModel qCalcLast(int sensorId){
+		DriftModel model = new DriftModel();
+		SenDataDB dataDb = new SenDataDB();
+		List<DataSensorDb> data = new ArrayList<>();
+		
+		ArrayList<double[]> lV = new ArrayList<>();
+		data = dataDb.getLastRows(16, sensorId);
+		ArrayList<Integer> t5 = new ArrayList<>();
+		ArrayList<Integer> t4 = new ArrayList<>();
+		ArrayList<Integer> t3 = new ArrayList<>();
+		ArrayList<Integer> t2 = new ArrayList<>();
+		
+		
+		
+		for(int j=0;j<4;j++){
+			t5.add(data.get(j).getData());
+
+		}
+		for(int j=4;j<8;j++){
+			t4.add(data.get(j).getData());
+		}
+		for(int j=8;j<12;j++){
+			t3.add(data.get(j).getData());
+		}
+		
+		for(int i=12;i<16;i++){
+			t2.add(data.get(i).getData());
+		}
+
+		double[] t5b = new double[4];
+		double[] t4b = new double[4];
+		double[] t3b = new double[4];
+		double[] t2b = new double[4];
+		for(int i=0;i<t5.size();i++){
+			t5b[i] = t5.get(i);
+		}
+
+		for(int i=0;i<t4.size();i++){
+			t4b[i] = t4.get(i);
+		}
+		for(int i=0;i<t3.size();i++){
+			t3b[i] = t3.get(i);
+		}
+		for(int i=0;i<t2.size();i++){
+			t2b[i] = t2.get(i);
+		}
+		
+		
+		
+		double[] t5c = new double[3];
+		double[] t4c = new double[3];
+		double[] t3c = new double[3];
+		double[] t2c = new double[3];
+		
+		t5c[0] = Quartile.min(t5b);
+		t5c[1] = Quartile.quartile(t5b, 50);
+		t5c[2] = Quartile.max(t5b);
+		t4c[0] = Quartile.min(t4b);
+		t4c[1] = Quartile.quartile(t4b, 50);
+		t4c[2] = Quartile.max(t4b);
+		t3c[0] = Quartile.min(t3b);
+		t3c[1] = Quartile.quartile(t3b, 50);
+		t3c[2] = Quartile.max(t3b);
+		t2c[0] = Quartile.min(t2b);
+		t2c[1] = Quartile.quartile(t2b, 50);
+		t2c[2] = Quartile.max(t2b);
+		
+		
+		//quartileModel.setCauMin(Quartile.min(cauDataValues));
+		//quartileModel.setCauLow(Quartile.quartile(cauDataValues, 25));
+		//quartileModel.setCauMid(Quartile.quartile(cauDataValues, 50));
+		//quartileModel.setCauHigh(Quartile.quartile(cauDataValues, 75));
+		//quartileModel.setCauMax(Quartile.max(cauDataValues));
+		model.setT5(t5c);
+		model.setT4(t4c);
+		model.setT3(t3c);
+		model.setT2(t2c);
+		
+		lV.add(model.getT1());
+		lV.add(model.getT2());
+		lV.add(model.getT3());
+		lV.add(model.getT4());
+		lV.add(model.getT5());
+		
+		model.setlV(lV);
+		
+		
+		return model;
 	}
 	
 }
